@@ -1,0 +1,66 @@
+#include <stdio.h>
+
+void decimalToBinary(int n) {
+    if (n == 0) {
+        printf("0");
+        return;
+    }
+    
+    int array[8];  // 8 位元足夠存二進位
+    int i = 0;
+    
+    while (n > 0) {
+        array[i] = n % 2;
+        n = n / 2;
+        i++;
+    }
+
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%d", array[j]);
+    }
+}
+
+void decimalToHexadecimal(int n) {
+    if (n == 0) {
+        printf("0");
+        return;
+    }
+    
+    char array[2];  // 2 位足夠存十六進位
+    int i = 0;
+    
+    while (n > 0) {
+        int remainder = n % 16;
+        if (remainder < 10)
+            array[i] = remainder + '0';
+        else
+            array[i] = remainder - 10 + 'A';
+        n = n / 16;
+        i++;
+    }
+
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%c", array[j]);
+    }
+}
+
+int main() {
+    int num;
+    printf("請輸入一個十進位數 (0-255): ");
+    scanf("%d", &num);
+
+    // 新增輸入範圍檢查
+    if (num < 0 || num > 255) {
+        printf("輸入錯誤，請輸入 0 到 255 之間的數字。\n");
+        return 1; // 結束程式
+    }
+
+    printf("二進位表示: ");
+    decimalToBinary(num);
+    printf("\n");
+    printf("十六進位表示: ");
+    decimalToHexadecimal(num);
+    printf("\n");
+
+    return 0;
+}
